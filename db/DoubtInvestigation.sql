@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `DoubtInvestigation`.`rule` (
   `UUID` VARCHAR(45) UNIQUE NOT NULL,
   `typeUUID` VARCHAR(45) NOT NULL COMMENT '规则类型UUID',
   `ruleName` VARCHAR(45) NOT NULL COMMENT '规则名称',
-  `typeIntroduction` TEXT NOT NULL COMMENT '规则简介',
+  `ruleIntroduction` TEXT NOT NULL COMMENT '规则简介',
   PRIMARY KEY (`id`, `UUID`))
 ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT = '规则类型表';
 

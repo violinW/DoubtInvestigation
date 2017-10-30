@@ -23,13 +23,14 @@ public class FieldIncoherentAccess {
 	}
 	
 	public ResultSet excuteQuery(String dbName, String tableName, String fieldName) {
-		DbAccess myAccess = new DbAccess(dbName);
-		
 		String sql = "select * from " + tableName + " limit 2";
 
 		try {
+			DbAccess acc = new DbAccess();
+			acc.connectDBDefault(dbName);
+			Statement statement = (Statement) acc.conn.createStatement();
 			// 结果集
-			ResultSet rs = ((Statement)myAccess).executeQuery(sql);
+			ResultSet rs = statement.executeQuery(sql);
 			
 			return rs;
 			

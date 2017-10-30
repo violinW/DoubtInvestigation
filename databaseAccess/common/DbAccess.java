@@ -15,31 +15,26 @@ import config.TargetDBConfig;
  * 公有方法  需要权限
  */
 public class DbAccess {
-	
-	
-	public DbAccess() {
-		//System.out.println("请传入数据库名，表明，用户名，密码等信息");
-	}
-	public DbAccess(String dbName) {
-		this.connectDBDefault(dbName);
-	}
-	public DbAccess(String host, String port, String dbName, String user, String password) {
-		this.connectDB(host, port, dbName, user, password);
-	}
-	
+	public Connection conn;
 	
 	/**
 	 * 使用默认域名和端口号访问数据库
 	 * @param dbName 数据库名
 	 * @param user MySQL配置时的用户名
 	 * @param password MySQL配置时的密码
+	 * 
+	 * 用法举例：
+	 * DbAccess acc = new DbAccess();
+	 * acc.connectDB(systemConf.host, systemConf.port, dbName, systemConf.user, systemConf.password);
+	 * acc.conn.createStatement()
+	 * 
 	 * @return
 	 */
-	public Connection connectDBDefault(String dbName) {
+	public void connectDBDefault(String dbName) {
 		
 		TargetDBConfig conf = new TargetDBConfig();
 		
-		return this.connectDB(conf.host, conf.port, dbName, conf.user, conf.password);
+		this.connectDB(conf.host, conf.port, dbName, conf.user, conf.password);
 	}
 	
 	/**
@@ -51,7 +46,7 @@ public class DbAccess {
 	 * @param password MySQL配置时的密码
 	 * @return
 	 */
-	public Connection connectDB(String host, String port, String dbName, String user, String password) {
+	public void connectDB(String host, String port, String dbName, String user, String password) {
 		
 		System.out.println("host: " + host + ", port " + port + ", adName: " + dbName + ", user: " + user + ", password: " + password);
 		// 驱动程序名
@@ -65,13 +60,10 @@ public class DbAccess {
 			Class.forName(driver);
 
 			// 连续数据库
-			Connection conn = DriverManager.getConnection(url, user, password);
+			conn = DriverManager.getConnection(url, user, password);
 
 			if (!conn.isClosed())
 				System.out.println("Succeeded connecting to the Database!");
-
-			
-			return conn;
 
 		} catch (ClassNotFoundException e) {
 
@@ -88,11 +80,9 @@ public class DbAccess {
 
 		}
 		
-		return null;
-		
 	}
 	
-	public void closeConnection(Connection conn) throws SQLException {
-		((Connection)conn).close();
+	public void closeConnection() throws SQLException {
+		conn.close();
 	}
 }

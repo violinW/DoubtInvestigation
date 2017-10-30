@@ -5,14 +5,16 @@ import java.sql.SQLException;
 
 import common.DbAccess;
 import common.ruleOperator;
-import common.ruleOperator.RuleType;
+import defaultStructure.Rule;
+import defaultStructure.RuleType;
 import ruleManager.ruleCenterClass;
 
 public class RuleCenterDaoClass extends ruleCenterClass {
 
 	public static void main(String[] args) {
 		RuleCenterDaoClass self = new RuleCenterDaoClass();
-		self.getAllRuleType();
+		String[] names = {"FieldIncoherent"};
+		self.getRule(names);
 	}
 	
 	/**
@@ -25,45 +27,36 @@ public class RuleCenterDaoClass extends ruleCenterClass {
 	}
 
 	@Override
-	public void addRule(String ruleTypeID, String ruleName, String typeIntroduction) {
-		int rs;
+	public void addRule(String ruleTypeID, String ruleName, String ruleIntroduction) {
 		ruleOperator ro = new ruleOperator();
-		try {
-			rs = ro.addRuleData(ruleTypeID, ruleName, typeIntroduction);
-			if(rs >= 0) {
-				System.out.println("添加规则成功！");
-			}else {
-				System.out.println("添加规则失败！");
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		int rs = ro.addRuleData(ruleTypeID, ruleName, ruleIntroduction);
+		if(rs >= 0) {
+			System.out.println("添加规则成功！");
+		}else {
+			System.out.println("添加规则失败！");
 		}
 	}
 
 	@Override
-	public Object[] getAllRuleType() {
-		// TODO Auto-generated method stub
+	public RuleType[] getAllRuleType() {
 		ruleOperator ro = new ruleOperator();
-		RuleType[] rs = ro.getAllRuleType(0);
-		System.out.println("-----------------");
-		System.out.println("ruleTypeList:");
-		System.out.println("-----------------");
-
+		RuleType[] rs = (RuleType[])(ro.getAllRuleType(0));
 		
-		return null;
+		return rs;
 	}
 
 	@Override
-	public Object[] getRule() {
-		// TODO Auto-generated method stub
-		return null;
+	public Rule[] getRule() {
+		ruleOperator ro = new ruleOperator();
+		Rule[] rs = (Rule[])(ro.getAllRule(0));
+		return rs;
 	}
 
 	@Override
-	public Object[] getRule(String[] ruleNames) {
-		// TODO Auto-generated method stub
-		return null;
+	public Rule[] getRule(String[] ruleNames) {
+		ruleOperator ro = new ruleOperator();
+		Rule[] rs = (Rule[])(ro.getRuleByNames(ruleNames));
+		return rs;
 	}
 
 }
