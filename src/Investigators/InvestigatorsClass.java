@@ -12,10 +12,10 @@ package Investigators;
  * 3、举报怀疑对象（reportSuspect）需要将可疑对象交给核实者 私有方法 提供给解读规则的对象使用 4、检举员子类
  */
 public abstract class InvestigatorsClass {
+	
+	public abstract Object[] getData(String ruleType, String ruleName, String tableName, String fieldName);
 
 	public abstract Object[] checkData(Object[] data, String ruleType, String ruleName);
-
-	public abstract Object[] checkData(Object[] data, String[] ruleName);
 
 	protected abstract Object[] getRuleFromRuleCenter(String ruleName);
 

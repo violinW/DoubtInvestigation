@@ -3,7 +3,7 @@ package common;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.UUID; 
+import java.util.*;
 import com.mysql.jdbc.Statement;
 import config.SystemDBConfig;
 import defaultStructure.Rule;
@@ -110,7 +110,6 @@ public class ruleOperator {
 	public Rule[] getAllRule(int limit) {
 		System.out.println("enter getAllRule 获取所有规则\n\n");
 		
-		String countSql = "select count(*) as count from rule";
 		String sql = "select * from rule";
 		if(limit > 0) {
 			sql += " limit " + String.valueOf(limit);
@@ -121,31 +120,26 @@ public class ruleOperator {
 			acc.connectDB(systemConf.host, systemConf.port, dbName, systemConf.user, systemConf.password);
 			Statement statement = (Statement) acc.conn.createStatement();
 			
-			ResultSet countRs = statement.executeQuery(countSql);
-			countRs.next();
-			int resultLength = Integer.parseInt(countRs.getString("count"));
-			
 			ResultSet rs = statement.executeQuery(sql);
-			Rule[] result = new Rule[resultLength];
-			int i = 0;
+			List<Rule> result = new ArrayList<Rule>();
 			while (rs.next()) {
 				Rule item = new Rule();
 				item.UUID = rs.getString("UUID");
 				item.typeUUID = rs.getString("typeUUID");
 				item.ruleName = rs.getString("ruleName");
 				item.ruleIntroduction = rs.getString("ruleIntroduction");
-				result[i++] = item;
+				result.add(item);
 			}
 			acc.closeConnection();
 
-			System.out.println("access table rule result:  resultLength  " + resultLength + "\n");
+			System.out.println("access table rule result:  resultLength  " + result.size() + "\n");
 			
 			System.out.println("| UUID            | typeUUID            | ruleName             | ruleIntroduction\n");
-			for(int j = 0; j < resultLength; j++) {
-				System.out.println("| " + result[j].UUID + "       | " + result[j].typeUUID + "       | " + result[j].ruleName + 
-						"        | " + result[j].ruleIntroduction + "\n");
+			for(int j = 0; j < result.size(); j++) {
+				System.out.println("| " + result.get(j).UUID + "       | " + result.get(j).typeUUID + "       | " + result.get(j).ruleName + 
+						"        | " + result.get(j).ruleIntroduction + "\n");
 			}
-			return result;
+			return (Rule[])result.toArray();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -250,8 +244,6 @@ public class ruleOperator {
 			nameList += names[i];
 			nameList += "', '";
 		}
-
-		String countSql = "select count(*) as count from rule where ruleName in ('" + nameList + "')";
 		String sql = "select * from rule where ruleName in ('" + nameList + "')";
 		
 		try {
@@ -260,21 +252,17 @@ public class ruleOperator {
 			acc.connectDB(systemConf.host, systemConf.port, dbName, systemConf.user, systemConf.password);
 			Statement statement = (Statement) acc.conn.createStatement();
 
-			System.out.println("countSql: " + countSql);
 			System.out.println("sql: " + sql);
-			ResultSet countRs = statement.executeQuery(countSql);
-			countRs.next();
-			int resultLength = Integer.parseInt(countRs.getString("count"));
 			ResultSet rs = statement.executeQuery(sql);
 			int i = 0;
-			Rule[] result = new Rule[resultLength];
+			List<Rule> result = new ArrayList<Rule>();
 			while (rs.next()) {
 				Rule item = new Rule();
 				item.UUID = rs.getString("UUID");
 				item.typeUUID = rs.getString("typeUUID");
 				item.ruleName = rs.getString("ruleName");
 				item.ruleIntroduction = rs.getString("ruleIntroduction");
-				result[i++] = item;
+				result.add(item);
 			}
 			
 			acc.closeConnection();
@@ -282,12 +270,12 @@ public class ruleOperator {
 			System.out.println("access table rule result:\n");
 			
 			System.out.println("| UUID            | typeUUID            | ruleName             | ruleIntroduction\n");
-			for(int j = 0; j < resultLength; j++) {
-				System.out.println("| " + result[j].UUID + "       | " + result[j].typeUUID + "       | " + result[j].ruleName + 
-						"        | " + result[j].ruleIntroduction + "\n");
+			for(int j = 0; j < result.size(); j++) {
+				System.out.println("| " + result.get(j).UUID + "       | " + result.get(j).typeUUID + "       | " + result.get(j).ruleName + 
+						"        | " + result.get(j).ruleIntroduction + "\n");
 			}
 		
-			return result;
+			return (Rule[])result.toArray();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
