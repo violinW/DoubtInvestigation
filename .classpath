@@ -10,6 +10,7 @@
 	<classpathentry kind="src" path="databaseAccess"/>
 	<classpathentry kind="src" path="common"/>
 	<classpathentry kind="src" path="structure"/>
+	<classpathentry kind="src" path="culc"/>
 	<classpathentry kind="lib" path="libs/mysql-connector-java-5.1.44-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -3,6 +3,7 @@
  */
 package Investigators;
 
+import java.util.List;
 
 /**
  * 侦查员类 用于从给定数据中找出“可疑”的数据缺失或错误，但不进行验证
@@ -13,13 +14,13 @@ package Investigators;
  */
 public abstract class InvestigatorsClass {
 	
-	public abstract Object[] getData(String ruleType, String ruleName, String tableName, String fieldName);
+	public abstract List<Object> getData(String tableName, String fieldName);
 
-	public abstract Object[] checkData(Object[] data, String ruleType, String ruleName);
+	public abstract List<Object> checkData(List<Object> data, String ruleType, String ruleName, String regExp);
 
-	protected abstract Object[] getRuleFromRuleCenter(String ruleName);
+	protected abstract List<Object> getRuleFromRuleCenter(String ruleName);
 
-	protected abstract void reportSuspect(Object[] data);
+	protected abstract void reportSuspect(List<Object> data);
 
 	/**
 	 * 检举员 用于解读规则并提出质疑

@@ -1,5 +1,7 @@
 package InvestigatorsDao;
 
+import java.util.List;
+
 import Investigators.InvestigatorsClass;
 import MissData.FieldIncoherentAccessClass;
 import config.TargetDBConfig;
@@ -10,34 +12,30 @@ public class InvestigatorsDaoClass extends InvestigatorsClass {
 	TargetDBConfig tarConf = new TargetDBConfig();
 	
 	@Override
-	public Object[] getData(String ruleType, String ruleName, String tableName, String fieldName) {
-		if(ruleType == "MissData" && ruleName == "FieldIncoherent") {
-			FieldIncoherentAccessClass fieldIncoAcc = new FieldIncoherentAccessClass();
-			
-			String[] rs = fieldIncoAcc.excuteQuery(tableName, fieldName);
-			return rs;
-		}
-		return null;
+	public List<Object> getData(String tableName, String fieldName) {
+		FieldIncoherentAccessClass FIAcc = new FieldIncoherentAccessClass();
+		List<Object> data = FIAcc.excuteQuery(tableName, fieldName);
+		return data;
 	}
 	
 	@Override
-	public Object[] checkData(Object[] data, String ruleType, String ruleName) {
-		if(ruleType == "MissData" && ruleName == "FieldIncoherent") {
-			String[] fieldIncoData = (String[])data;
-			
+	public List<Object> checkData(List<Object> data, String ruleType, String ruleName, String regExp) {
+		if(ruleType == "MissData") {
+			MissDataInvestigation MDInv = new MissDataInvestigation(ruleName, data, regExp);
+			return MDInv.getResult();
 		}
 		
 		return null;
 	}
 
 	@Override
-	protected Object[] getRuleFromRuleCenter(String ruleName) {
+	protected List<Object> getRuleFromRuleCenter(String ruleName) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	protected void reportSuspect(Object[] data) {
+	protected void reportSuspect(List<Object> data) {
 		// TODO Auto-generated method stub
 		
 	}
