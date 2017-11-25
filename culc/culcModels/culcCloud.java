@@ -7,7 +7,7 @@ public class culcCloud {
 	public static double exchangeRate = 0.0003;//云币兑换人民币日利率
 	public static double deductRate = 0.03;//推荐人提成率
 	public static double finalRate = 0.02;//被推荐人为商户提成率
-	public static int startDays = 1;
+	public static int startDays = 365*5;
 	
 	public static void main(String[] args) {
 		double startMoney = 0;

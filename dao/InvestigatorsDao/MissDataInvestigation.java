@@ -24,7 +24,8 @@ public class MissDataInvestigation {
 	public MissDataInvestigation(String ruleName, List<Object> data, String RegExp){
 		if(ruleName == "FieldIncoherent") {
 			FieldIncoherentDataHandler fiDataHandler = new FieldIncoherentDataHandler();
-			MissDataList = fiDataHandler.defaultDataFI(data, RegExp);
+			List<Object> dealedData = fiDataHandler.defaultDataFI(data, RegExp);
+			MissDataList = fiDataHandler.defaultBlacklistFI(dealedData);
 		}
 	}
 	/**
@@ -73,6 +74,16 @@ public class MissDataInvestigation {
 			System.out.println("---------------end FieldIncoherentDataHandler defaultDataFI-------------");
 			
 			return listResult;
+		}
+	
+		public List<Object> defaultBlacklistFI(List<Object> data){
+			System.out.println("---------------start FieldIncoherentDataHandler defaultBlacklistFI-------------");
+			
+			
+			
+			System.out.println("---------------end FieldIncoherentDataHandler defaultBlacklistFI-------------");
+			
+			return data;
 		}
 		
 		private List<Object> makeResult(List<HashMap<String, List<HashMap<String, String>>>> list){

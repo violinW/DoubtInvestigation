@@ -1,8 +1,8 @@
 package culcModels;
 
 public class culcCash1 {
-	public static double initCloudBill = 115000;
-	public static int initDays = 365*5;
+	public static double initCloudBill = 1000;
+	public static int initDays = 365;
 	
 	public static void main(String[] Args) {
 		dtType data = culcProfite(initDays, initCloudBill, 0);
@@ -12,7 +12,7 @@ public class culcCash1 {
 	public static dtType culcProfite(int days, double remainCloudBill, double madeMoney) {
 		dtType dt = new dtType();
 		dt.remainCloudBill = remainCloudBill*(1-0.0005);
-		dt.madeMoney = madeMoney+ remainCloudBill * 0.0005 * 0.88;
+		dt.madeMoney = madeMoney + remainCloudBill * 0.0005 * 0.88;
 		days--;
 		if(days > 0) {
 			return culcProfite(days, dt.remainCloudBill, dt.madeMoney);
