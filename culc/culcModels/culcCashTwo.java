@@ -2,13 +2,15 @@ package culcModels;
 
 //使用云币增值
 public class culcCashTwo {
-	//public static double initPut = 15000;
-	public static double initCloudBill = 101000;
+	//public static double initPut = 31000;
+	public static double initCloudBill = 855368;
 	public static int initDays = 365*2;
 	public static double initMadeMoney = 0;
 	public static double rate = 0.15;
-	public static double cushRate = 1;
+	public static double cushRate = 0.5;
 	public static double cushDays = 30;
+	
+	public static int i = 1;
 	
 	public static void main(String[] Args) {
 		dtType data = culcProfite(initDays, initCloudBill, initMadeMoney, 0, 0);
@@ -25,9 +27,13 @@ public class culcCashTwo {
 		if((int)d == d & d > 0) {
 			double canCush = Math.floor(dt.madeMoney/100)*100;
 			dt.cash = cash + canCush*cushRate;
-			dt.remainCloudBill = dt.remainCloudBill*(1 + 0.01) - dt.madeMoney/0.88 + canCush*(1-cushRate)/rate;
+			dt.remainCloudBill = dt.remainCloudBill + Math.floor(dt.remainCloudBill/100)*100*0.01 - dt.madeMoney/0.88 + canCush*(1-cushRate)/rate;
 			dt.madeMoney = dt.madeMoney - canCush;
-			System.out.println("remainCloudBill month " + (int)d + ": " + dt.remainCloudBill + ", cash: " + dt.cash + ", madeBill: "+ remainCloudBill*0.01);
+			System.out.println("remainCloudBill round " + (int)d + ": " + dt.remainCloudBill + ", canCush: " + canCush + ", cush: " + dt.cash + ", madeBill: "+ remainCloudBill*0.01);
+			if(dt.cash >= 31000  && i > 0) {
+				System.out.println("回本：" + dt.cash);
+				i--;
+			}
 		}
 		if(days > 0) {
 			return culcProfite(days, dt.remainCloudBill, dt.madeMoney,  dt.cash, lastMadeCush);

@@ -3,10 +3,10 @@ package culcModels;
 //不进行云币增值
 public class culcCash3 {
 	public static double initCloudBill = 101000;
-	public static int initDays = 365;
+	public static int initDays = 365*2;
 	public static double initMadeMoney = 0;
 	public static double rate = 0.15;
-	public static double cushRate = 1;
+	public static double cushRate = 0;
 	public static double cushDays = 1;
 	
 	public static void main(String[] Args) {
@@ -27,7 +27,7 @@ public class culcCash3 {
 			dt.cash = cash + canCush*cushRate;
 			dt.remainCloudBill = dt.remainCloudBill + canCush*(1-cushRate)/rate;
 			dt.madeMoney = dt.madeMoney - canCush;
-			System.out.println("remainCloudBill round " + (int)d + ": " + dt.remainCloudBill + ", cash: " + dt.cash + ", madeMoney: " + dt.madeMoney);
+			System.out.println("remainCloudBill round " + (int)d + ": " + dt.remainCloudBill + ", canCush: " + canCush + ", madeMoney: " + dt.madeMoney);
 		}
 		if(days > 0) {
 			return culcProfite(days, dt.remainCloudBill, dt.madeMoney,  dt.cash, lastMadeCush);
