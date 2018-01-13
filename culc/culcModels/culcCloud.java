@@ -1,7 +1,7 @@
 package culcModels;
 
 public class culcCloud {
-	public static double consumeIncreaseRate = 0.0025;
+	public static double consumeIncreaseRate = 0.0025;//消费日增长率
 	public static double systemSJRate = 0.15;//系统向商家收取提成比例
 	public static double systemTXRate = 0.12;//系统提现收取利率
 	public static double exchangeRate = 0.0003;//云币兑换人民币日利率
