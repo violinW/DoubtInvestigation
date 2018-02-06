@@ -1,7 +1,5 @@
 package culcModels;
 
-import culcModels.culcCash1.dtType;
-
 public class ZGRSThreeYear {
 	public static int TotalYear = 3;  //年限
 	public static double BE = (TotalYear==3 ? 2330 : 3220); //保额

@@ -1,7 +1,7 @@
 package culcModels;
 
 public class culcCash1 {
-	public static double initCloudBill = 1000;
+	public static double initCloudBill = 70000;
 	public static int initDays = 365;
 	
 	public static void main(String[] Args) {

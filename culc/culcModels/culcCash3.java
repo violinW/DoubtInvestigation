@@ -2,7 +2,7 @@ package culcModels;
 
 //不进行云币增值
 public class culcCash3 {
-	public static double initCloudBill = 187524;
+	public static double initCloudBill = 4000000;
 	public static int initDays = 365*4;
 	public static double initMadeMoney = 0;
 	public static double rate = 0.15;

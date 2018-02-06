@@ -7,7 +7,7 @@ public class culcCloud {
 	public static double exchangeRate = 0.0003;//云币兑换人民币日利率
 	public static double deductRate = 0.03;//推荐人提成率
 	public static double finalRate = 0.02;//被推荐人为商户提成率
-	public static int startDays = 365*5;
+	public static int startDays = 365*3;
 	
 	public static void main(String[] args) {
 		double startMoney = 0;
@@ -22,6 +22,7 @@ public class culcCloud {
 		double tomorrowOwnCloudBill = startOwnCloudBill + dailyConsume *(1 + deductRate + finalRate + systemSJRate);
 		days--;
 		if(days > 0) {
+			System.out.println("day: " + (startDays - days) + "，remainMoney: " + tomorrowStartMoney + ", ownCloudBill: " + tomorrowOwnCloudBill);
 			return culcCloud(days, tomorrowStartMoney, tomorrowOwnCloudBill, dailyConsume*(1 + consumeIncreaseRate));
 		}else {
 			dtType data = new dtType();

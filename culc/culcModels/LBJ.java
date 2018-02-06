@@ -1,7 +1,7 @@
 package culcModels;
-
+//洛贝集
 public class LBJ {
-	public static double CB = 10000*100;//钓鱼成本
+	public static double CB = 10000;//钓鱼成本
 	public static double Target = 10000*100000;//钓鱼目标
 	public static double singleDayIncreaseTimes = 5;//每天增长资金倍数
 	public static double goodsNumber = 100;//第一天销售商品数量

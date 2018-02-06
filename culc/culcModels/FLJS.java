@@ -1,7 +1,5 @@
 package culcModels;
 
-import culcModels.ZGRSThreeYear.dtType;
-
 //鑫账户复利计算
 public class FLJS {
 	public static int XZH = 1034836;
